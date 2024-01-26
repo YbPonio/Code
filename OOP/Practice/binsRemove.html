@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Removal Bins</title>
+</head>
+<style>
+    main{
+        display: flex;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
+
+        #itemsBin, #archive{
+            width: 300px;
+            height: 400px;
+            background: rgb(167, 167, 167);
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            #itemsHolder, #archiveHolder{
+                padding: 10px;
+                text-align: left;
+
+                .item{
+                    display: flex;
+                    padding: 5px;
+                    justify-content: space-between;
+                    background: #fff;
+                    border-radius: 5px;
+                    margin: 5px 0;
+                }
+            }
+        }
+    }
+</style>
+<body>
+    <nav>
+        
+    </nav>
+    <main>
+        <div id="itemsBin">
+            <h3>Items</h3>
+            <div id="itemsHolder"></div>
+        </div>
+        <div id="archive">
+            <h3>Archive</h3>
+            <div id="archiveHolder"></div>
+        </div>
+    </main>
+    <div class="item">${i + 1}. ${item} ${<button>asd</button>}</div>
+
+
+</body>
+    <script>
+        let items = [
+            'asdas',
+            'sdagf',
+            'rmt',
+        ];
+        let archive = [
+        ];
+
+        function showItems(){
+            itemsHolder.innerHTML = "";
+            for(let i = 0; i < items.length; i++){
+                let item = items[i];
+                itemsHolder.innerHTML += `
+                <div class="item">${i + 1}. ${item} <button onclick="deleteItem(${i})">Delete</button> </div>
+                `;
+            }
+        }
+        function showArchive(){
+            archiveHolder.innerHTML = "";
+            for(let i = 0; i < archive.length; i++){
+                let item = archive[i];
+                archiveHolder.innerHTML += `
+                <div class="item">${i + 1}. ${item} <div></button><button onclick="">Restore</button> <button onclick="">Delete</button><div></button> </div>
+                `;
+            }
+        }
+        function addItem(){ 
+            
+        }
+        function deleteItem(a){
+            archive.push(items[a]);
+            items.splice(a, 1);
+
+            console.log(a);
+
+            showItems();
+            showArchive();
+        }
+
+        showItems();
+        showArchive();
+
+    </script>
+</html>

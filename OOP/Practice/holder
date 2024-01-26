@@ -1,0 +1,16 @@
+
+        document.addEventListener('DOMContentLoaded', function () {
+            itemModal.addEventListener('click', function () {
+                modalContainer.style.display = 'flex';
+            });
+
+            itemModal.addEventListener('click', function () {
+                modalContainer.style.display = 'none';
+            });
+        });
+
+        function addItem() {
+            // let newItem = prompt("Enter new source for image:");
+            // let newName = prompt("Enter the name:");
+            itemModal.style.display = "flex";
+        }

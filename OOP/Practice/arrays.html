@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        offset: 0;
+        box-sizing: border-box;
+        /* outline: solid 1px red; */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .gallery {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        height: 100vh;
+        flex-wrap: wrap;
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            max-width: 200px;
+            margin: 10px;
+            box-shadow: 2px 5px 7px rgba(49, 49, 49, 0.353);
+            transition: all .2s ease-in-out;
+            background-size: cover;
+
+            &:hover {
+                transform: scale(1.1);
+
+                p {
+                    background-color: rgba(0, 255, 255, 0.511);
+                    color: #000;
+                }
+            }
+
+            p {
+                background: #656565;
+                color: #fff;
+                text-align: center;
+                font-size: 18px;
+                padding: 5px;
+                font-weight: 500;
+                transition: all .2s ease-in-out;
+
+            }
+        }
+    }
+
+    nav {
+        display: flex;
+        /* height: 80px; */
+        padding: 10px;
+        background: #1a354e;
+        position: sticky;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+
+        button {
+            padding: 15px;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #005e5f;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #005e5fcf;
+            }
+        }
+        input {
+            padding: 8px;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+
+        }
+    }
+
+    #itemModal {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 300px;
+        width: 500px;
+        background: #ececec;
+        box-shadow: 0px 5px 10px 5px #5e5e5e73;
+        border-radius: 10px;
+        z-index: 99999;
+
+        input {
+            padding: 10px;
+            width: 50%;
+            background: #fff;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 3px;
+
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 13px;
+            background: #0094ea;
+            width: 50%;
+            border: none;
+            border-radius: 10px;
+        }
+
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <button onclick="displayItem()">Display Items</button>
+            <input id="itemURl" type="text" placeholder="Item Link:">
+            <input id="itemName" type="text" placeholder="Item Name:">
+            <button id="modalDisplay" onclick="addItem()">Add Item</button>
+            <button onclick="clearItem()">Clear</button>
+        </div>
+    </nav>
+
+    <!-- <div id="itemModal">
+        <button onclick="submitItemBtn()">Submit</button>
+    </div> -->
+
+    <div class="gallery" id="galleryContainer">
+        <p>It's Empty</p>
+    </div>
+
+    <script>
+
+        let imageHolder = [
+            { dog: "https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", name: "dog 1" },
+            { dog: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", name: "dog 2" },
+            { dog: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", name: "dog 3" },
+            { dog: "https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=1924&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", name: "dog 4" },
+        ];
+
+        function displayItem() {
+            galleryContainer.innerHTML = "";
+            for (let i = 0; i < imageHolder.length; i++) {  
+                let imageSource = imageHolder[i].dog;
+                galleryContainer.innerHTML += `
+                <div class="gallery-item">
+                    <img src="${imageSource}" alt="${imageHolder[i].name}">
+                    <p>${imageHolder[i].name}</p>
+                </div>
+                `;
+            }
+        }
+
+        function addItem(){
+            let newItem = itemURl.value;
+            let newName = itemName.value;
+
+            if(!newItem || !newName){
+                alert("ERROR!");
+                return;
+            }
+
+            imageHolder.push({ 
+                dog: newItem, 
+                name: newName 
+            });
+            displayItem();
+        }
+
+
+        function clearItem() {
+            galleryContainer.innerHTML = "";
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    nav{
+        z-index: 99;
+        width: 100%;
+        position: fixed;
+        background-color: rgb(79, 78, 86);
+
+        #nav-container {
+            position: relative;
+            margin: auto;
+            padding: 0 20px;
+            height: 100px;
+            line-height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+
+            .logo a{
+                font-size: 40px;
+                color: #fff;
+                text-decoration: none;
+                
+                &:hover{
+                    color: #6186aa;
+                }
+            }
+
+            .main-nav{
+                display: inline-flex;
+
+                li{
+                    list-style: none;
+                }
+
+                li a{
+                    color: #fff;
+                    padding: 0 20px ;
+                    text-decoration: none;
+                    font-size: 20px;
+                    font-weight: 500px;
+                    transition: all .3s ease;
+                    cursor: pointer;
+
+                    &:hover{
+                        color: #6186aa;
+                    }
+                }
+            }
+
+            #styleSelector{
+                background: none;
+                border: none;
+                outline: none;
+                font-size: 20px;
+                color: #fff;
+
+                option{
+                    background-color: rgb(79, 78, 86);
+                }
+            }
+        }
+    }
+
+    main {
+        min-height: 100vh;
+        background-color: antiquewhite;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+
+        .box {
+            background-color: rgb(21, 82, 196);
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            font-weight: 900;
+            font-family: fantasy;
+            border: solid 1px black;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+                box-shadow: 5px 5px 5px rgb(83, 79, 79);
+            }
+        }
+
+        .circle {
+            background-color: rgb(21, 82, 196);
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            font-weight: 900;
+            font-family: fantasy;
+            border: solid 1px black;
+            font-size: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+                box-shadow: 5px 5px 5px rgb(83, 79, 79);
+            }
+        }
+
+        
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div id="nav-container">
+                <div class="logo"><a href="#">Logo</a></div>
+                <ul class="main-nav">
+                    <li><a href="#" onclick="addButton()">Add</a></li>
+                    <li><a href="#" onclick="addMultipleButtons()">Add Multiple</a></li>
+                    <li><a href="#" onclick="clearButton()">Clear</a></li>
+
+                    <select id="styleSelector">
+                        <option value="box">Box</option>
+                        <option value="circle">Circle</option>
+                    </select>
+                </ul>
+        </div>
+    </nav>
+    <main id="mainContainer">
+
+    </main>
+    
+</body>
+<script>
+    let boxNumExisting = 1;
+
+
+    function addMultipleButtons() {
+        let boxNum = prompt("How many?");
+
+        for (let i = 1; i <= boxNum; i++) {
+            objectCreate();
+        }
+    }
+
+    function addButton() {
+        objectCreate();
+    }
+
+    function objectCreate() {
+        let currentStyle = document.getElementById("styleSelector").value;
+        mainContainer.innerHTML += `<div class = "${currentStyle}">${boxNumExisting} </div>`;
+        boxNumExisting++;
+    }
+
+    function clearButton() {
+        mainContainer.innerHTML = "";
+        boxNumExisting = 1;
+    }
+
+</script>
+</html>

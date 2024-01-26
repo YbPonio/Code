@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    main{
+        padding: 50px;
+        min-height: 100vh;
+
+        #container{
+            margin: auto;
+            background: #2f2e2e;
+            max-width: 600px;
+            height: 700px;
+            border-top-right-radius: 50px;
+            border-top-left-radius: 50px;
+            padding: 20px;
+            padding-top: 60px;
+            overflow: scroll;
+            overflow: overlay;
+        }
+
+        .sendButton{
+            margin: auto;
+            max-width: 500px;
+            text-align: center;
+            padding: 20px;
+            background: #2f2e2e;
+            max-width: 600px;
+            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 50px;
+
+            button{
+                padding: 10px;
+                background: #2fa8ff;
+                border: 1px solid #0453636d;
+                border-radius: 5px;
+            }
+        }
+        section.self{
+            display: flex;
+            margin: auto;
+            background: #87c1ff;
+            border: 1px solid #ffffff;
+            padding: 20px 15px; 
+            border-radius: 60px;
+            max-width: 500px;
+            margin-bottom: 10px;
+            flex-direction: row-reverse;
+
+            .contentMessage{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: right;
+            }
+
+            .imageBox{
+                height: 50px;
+                width: 50px;
+                margin: 0 10px;
+                background: #ffffff;
+                border-radius: 50%;
+                border: 2px solid #ffffff;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+        section.other{
+            display: flex;
+            margin: auto;
+            background: #87c1ff;
+            border: 1px solid #ffffff;
+            padding: 20px 15px; 
+            border-radius: 60px;
+            max-width: 500px;
+            margin-bottom: 10px;
+
+            
+            .contentMessage{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .imageBox{
+                height: 50px;
+                width: 50px;
+                border: 2px solid #ffffff;
+                background: #ffffff;
+                margin: 0 10px;
+                border-radius: 50%;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+    dialog{
+        margin: auto;
+        border: none;
+        border-radius: 40px;    
+
+        form{
+            display: flex;
+            flex-direction: column;
+            padding: 40px ;
+            border: none;
+
+            button{
+                padding: 10px;
+                margin-top: 5px;
+            }
+            input{
+                padding: 10px;
+                margin-bottom: 5px;
+                outline: none;
+
+            }
+            select{
+                padding: 10px;
+            }
+            textarea{
+                padding: 10px;
+                margin-bottom: 5px;
+                resize: none;
+                outline: none;
+            }
+        }
+
+    }
+    #errorBox{
+        padding: 50px;
+        border: none;
+  
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+
+            button{
+                margin-top: 40px;
+                padding: 10px 30px;
+
+            }
+        }
+    }
+
+</style>
+<body>
+    <main>
+        <div id="container">
+        </div>
+        <div class="sendButton">
+            <input type="text" placeholder="sdd">
+            <button onclick="dialogBox.showModal()">Send Message</button>
+        </div>
+    </main>
+    <dialog id="dialogBox">
+        <form method="dialog">
+            <input type="text" id="nameInput" placeholder="Name:">
+            <!-- <input id="messageInput" type="text" placeholder="Message:"> -->
+            <textarea name="message" id="messageInput" cols="40" rows="5" placeholder="Message:"></textarea>
+            <input id="imgInput" type="text" placeholder="Image url:">
+            <select name="dropdown" id="classSelect">
+                <option value="self">Your Message</option>
+                <option value="other">Other Message</option>
+            </select>
+            <button onclick="sendMessage()">Send Message</button>
+            <button>Cancel</button>
+        </form>
+    </dialog>
+    <dialog id="errorBox">
+        <div>
+            <h2>ERROR!</h2>
+            <button onclick="errorBox.close()">OK</button>
+        </div>
+    </dialog>
+</body>
+
+
+<script>
+    let messages = [
+        {
+            name: "Mark",
+            text: "Hello?",
+            class: "other",
+            img: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1998&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+        {
+            name: "Hellen",
+            text: "Hi, how are you?",
+            class: "self",
+            img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+        {
+            name: "Hellen",
+            text: "Hi, how are you?",
+            class: "self",
+            img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+        {
+            name: "Hellen",
+            text: "Hi, how are you?",
+            class: "self",
+            img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+        {
+            name: "Hellen",
+            text: "Hi, how are you?",
+            class: "self",
+            img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+        {
+            name: "Hellen",
+            text: "Hi, how are you?",
+            class: "self",
+            img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        },
+    ]
+    function dislplayItem(){
+        container.innerHTML = '';
+        let newMessage = ""; 
+        for(let i = 0; i < messages.length; i++){
+            let message = messages[i];
+            if(i == message.length -1){
+                let newMessage = 'newMessage';
+            } else{
+                newMessage = '';
+            }
+            newDisplay();
+            }       
+        location.href = "#newMessage";
+    }
+    function newDisplay(){
+        container.innerHTML += `
+                <section class="${message.class}" id="${newMessage}">
+                    <div class="imageBox"><img src="${message.img}" alt=""></div>
+                    <div class="contentMessage">
+                    <h3>${message.name}</h3>
+                    <p>${message.text}</p>
+                    </div>
+                    </section>
+                    `;
+    }
+
+    function sendMessage(){
+        let message = messageInput.value;
+        let name = nameInput.value;
+        let theClass = classSelect.value;
+        let image = imgInput.value;
+
+        if(!name || !theClass || !image){
+            errorBox.showModal();
+            return;
+        } else if(!message){
+            message = "..."
+        }
+        
+
+        messages.push(
+            {
+                name: name,
+                text: message,
+                class: theClass,
+                img: image,
+            }
+        )
+        dislplayItem();
+    }
+
+    dislplayItem();
+</script>
+</html>

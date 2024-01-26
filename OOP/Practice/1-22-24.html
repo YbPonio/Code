@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1/22/2024</title>
+    <link rel="stylesheet" href="1-22-24.css">
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <input type="text" placeholder="First Name" id="firstnameInput" >
+            <input type="text" placeholder="Last Name" id="lastnameInput" >
+            <button onclick="CombineNames()">Concatenate</button>
+            <h1 id="fullnameContainer">Full Name</h1>
+        </div>
+    </main>
+</body>
+
+<script>
+    function CombineNames(){
+        let fistName = firstnameInput.value;
+        let lastName = lastnameInput.value;
+        
+        let capitalizefirstLetter = capitalizeFirstLetter(fistName);
+        let capitalizelastLetter = capitalizeFirstLetter(lastName);
+        
+        let fullName = `${capitalizefirstLetter} ${capitalizelastLetter}`;
+        fullnameContainer.innerHTML = fullName; 
+    }
+
+    function capitalizeFirstLetter(str) {
+      if (str && typeof str === 'string') {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      } else {
+        return '';
+      }
+    }
+</script>
+</html>

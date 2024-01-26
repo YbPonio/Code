@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1st Day Lesson</title>
+</head>
+<style id="newStyle">
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    nav {
+        background-color: cornflowerblue;
+        position: sticky;
+        top: 0;
+        min-width: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.363);
+
+        button {
+            background-color: beige;
+            color: black;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            transition: all .2s eas e-out;
+
+            &:hover {
+                background-color: cadetblue;
+                color: antiquewhite;
+            }
+        }
+
+        select {
+            background-color: beige;
+            border: none;
+            color: black;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px;
+            outline: none;
+
+            option {
+                display: flex;
+            }
+        }
+    }
+
+    main {
+        min-height: 100vh;
+        background-color: antiquewhite;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+
+        .box {
+            background-color: rgb(21, 82, 196);
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            font-weight: 900;
+            font-family: fantasy;
+            border: solid 3px black;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+                box-shadow: 5px 5px 5px rgb(83, 79, 79);
+            }
+        }
+
+        .circle {
+            background-color: rgb(21, 82, 196);
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            font-weight: 900;
+            font-family: fantasy;
+            border: solid 3px black;
+            font-size: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1, 1.1);
+                box-shadow: 5px 5px 5px rgb(83, 79, 79);
+            }
+        }
+
+        
+    }
+</style>
+
+<body>
+    <ul>
+        <li></li>
+    </ul>
+    <nav>
+        <button onclick="addButton()">ADD</button>
+        <button onclick="addMultipleButtons()">HOW MANY?</button>
+        <button onclick="clearButton()">CLEAR</button>
+
+        <select id="styleSelector">
+            <option value="box">BOX</option>
+            <option value="circle">CIRCLE</option>
+            <!-- <option value="star">STAR</option> -->
+        </select>
+    </nav>
+
+    <main id="mainContainer">
+    </main>
+</body>
+
+<script>
+    let boxNumExisting = 1;
+
+
+    function addMultipleButtons() {
+        let boxNum = prompt("How many?");
+
+        for (let i = 1; i <= boxNum; i++) {
+            objectCreate();
+        }
+    }
+
+    function addButton() {
+        objectCreate();
+    }
+
+    function objectCreate() {
+        let currentStyle = document.getElementById("styleSelector").value;
+        mainContainer.innerHTML += `<div class = "${currentStyle}">${boxNumExisting} </div>`;
+        boxNumExisting++;
+    }
+
+    function clearButton() {
+        mainContainer.innerHTML = "";
+        boxNumExisting = 1;
+    }
+
+
+</script>
+
+</html>

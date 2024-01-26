@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <input id="numberStart" type="number" placeholder="Start">
+        <input id="numberEnd" type="number" placeholder="End">
+        <input id="numberIncrement" type="number" placeholder="Increment">
+        <button onclick="generateItem()">Generate</button>
+        <button onclick="clearItem()">Clear</button>
+    </nav>
+    <main id="mainContainer">
+    </main>
+</body>
+<script>
+    function generateItem(){
+        mainContainer.innerHTML = "";
+        let firstNumber =  parseInt(numberStart.value);
+        let secondNumber =  parseInt(numberEnd.value);
+        let thirdNumber =  parseInt(numberIncrement.value);
+
+        if(!firstNumber || !secondNumber|| !thirdNumber){
+            alert("ERROR!");
+            return
+        }
+i
+        for(let i = frstNumber; i <= secondNumber; i+=thirdNumber){
+            mainContainer.innerHTML += `<div class="box">${i}</div>`;
+            console.log("TAMA");
+        }
+    }
+
+    function clearItem(){
+        mainContainer.innerHTML = "";
+    }
+</script>
+
+</html>
